@@ -57,4 +57,36 @@ else:
         print(f"Dividers: {sorted(unique_dividers)}")`
   },
 
+  {
+    day: 3,
+    name: "Treasure Island Game",
+    desc: "A quick choose your own adventure game.",
+    tags: ["if", "nested if"],
+    code: `# Day 3 - Treasure Island Game
+
+print("Welcome to Treasure Island.")
+print("Your mission is to find the treasure.")
+print("You arrive at a crossroads. The right path leads across a bridge. The left path leads to the lake.")
+choice1= input("Which path will you choose? Type 'left' or 'right'.")
+if choice1 == "left":
+    choice2 = input("You arrive at a lake. Will you swim across or wait for a boat? Type 'swim' or 'wait'.")
+    if choice2 == "wait":
+        print("A boat arrives to take you across. You arrive at a building with 3 doors.")
+        choice3=input("Which will you choose? Type 'red', 'yellow' or 'blue'.")
+        if choice3=="red":
+            print("Burned by fire. Game over")
+        elif choice3=="blue":
+            print("Eaten by wild beasts. Game over.")
+        elif choice3 == "yellow":
+            print("You win!")
+        else:
+            print("Game over.")
+    else:
+        print("Attacked by trout. Game Over.")
+elif choice1 == 'right':
+    print("Fall into a hole. Game over.")
+else:
+    print("Not a valid choice. Please try again.")`
+  },
+
 ];
