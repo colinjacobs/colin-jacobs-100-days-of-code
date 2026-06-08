@@ -139,7 +139,7 @@ while True:
         print("Choose number to play to.")
 
 while player_score < score and computer_score < score:
-    player_choice = input("Make your selection: Type 'r' for rock, 'p' for paper or 's' for scissors.")
+    player_choice = input("Make your selection: Type 'r' for rock, 'p' for paper or 's' for scissors.").lower()
     while player_choice not in ['r', 'p', 's']:
         print("Please choose a valid input")
         player_choice = input("Make your selection: Type 'r' for rock, 'p' for paper or 's' for scissors.")
