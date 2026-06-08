@@ -57,6 +57,7 @@ else:
         print(f"Dividers: {sorted(unique_dividers)}")`
   },
 
+
   {
     day: 3,
     name: "Treasure Island Game",
@@ -89,4 +90,90 @@ else:
     print("Not a valid choice. Please try again.")`
   },
 
+  {
+    day: 4,
+    name: "Rock, paper, scissors",
+    desc: "Classic game where you select the number of rounds you want to play",
+    tags: ["lists", "while loops", "index", "index"],
+    code: `# Day 4 - Rock, Paper, Scissors
+import random
+rock = '''
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+'''
+
+paper = '''
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+'''
+
+scissors = '''
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+'''
+game_images = [rock, paper, scissors]
+selection_names = ["rock", "paper", "scissors"]
+player_score = 0
+computer_score = 0
+
+while True:
+    try:
+        score = int(input("What score will you play to? Pick a number. "))
+        if score > 0:
+            break
+        else:
+            print("Choose a number greater than 0.")
+    except ValueError:
+        print("Choose number to play to.")
+
+while player_score < score and computer_score < score:
+    player_choice = input("Make your selection: Type 'r' for rock, 'p' for paper or 's' for scissors.")
+    while player_choice not in ['r', 'p', 's']:
+        print("Please choose a valid input")
+        player_choice = input("Make your selection: Type 'r' for rock, 'p' for paper or 's' for scissors.")
+    selection_input = ['r', 'p', 's']
+    selection_input_array = [0,1,2]
+    print(f"Player choice: {selection_names[selection_input.index(player_choice)]}")
+    print(f"{game_images[selection_input.index(player_choice)]}")
+    computer_choice = random.randint(0,2)
+    computer_select = [0,1,2]
+    print(f"Computer choice: {selection_names[computer_select.index(computer_choice)]}")
+    print(f"{game_images[computer_select.index(computer_choice)]}")
+    player_choice_num = selection_input_array[selection_input.index(player_choice)]
+    results = [player_choice_num, computer_choice]
+    print(results)
+
+    if results[0] == results[1]:
+         print("Tie game!")
+    elif results [0] == 0 and results [1] == 2:
+         print("Player wins!")
+         player_score += 1
+    elif results [0] == 2 and results [1] == 0:
+        print("Computer wins!")
+        computer_score += 1
+    elif results [0] > results [1]:
+        print("Player wins!")
+        player_score += 1
+    else:
+        print("Computer wins!")
+        computer_score +=1
+    print(f"Player score: {player_score}")
+    print(f"Computer score: {computer_score}")
+if computer_score > player_score:
+    print("Computer wins the match!")
+else:
+    print("Player wins the match!")`
+  }
 ];
