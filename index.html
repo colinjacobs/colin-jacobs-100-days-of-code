@@ -571,6 +571,8 @@ function selectProject(index) {
   renderCode(p.code || '');
   clearTerminal();
   if (pyodide) document.getElementById('runBtn').disabled = false;
+  const urlSlug = `day-${p.day}-${p.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/-+$/,'')}`;
+  history.pushState(null, '', '#' + urlSlug);
   // Auto-collapse sidebar on mobile after selecting a project
   if (window.innerWidth <= 800) {
     document.querySelector('.sidebar').classList.add('collapsed');
@@ -915,6 +917,17 @@ function toggleSidebar() {
 }
 
 // Auto-collapse handled inside selectProject()
+
+// Load project from URL hash on page load
+(function loadFromHash() {
+  const hash = window.location.hash.slice(1); // remove the #
+  if (!hash) return;
+  const match = PROJECTS.find(p => {
+    const slug = `day-${p.day}-${p.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/-+$/,'')}`;
+    return slug === hash;
+  });
+  if (match) selectProject(PROJECTS.indexOf(match));
+})();
 
 bootPyodide();
 </script>
