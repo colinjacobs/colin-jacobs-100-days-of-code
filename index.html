@@ -43,12 +43,13 @@
   body::before {
     content:''; position:fixed; inset:0;
     background:repeating-linear-gradient(0deg,transparent,transparent 3px,var(--scan) 3px,var(--scan) 4px);
-    pointer-events:none; z-index:9999;
+    pointer-events:none; z-index:9000;
   }
   ::-webkit-scrollbar { width:4px; }
   ::-webkit-scrollbar-track { background:var(--bg); }
   ::-webkit-scrollbar-thumb { background:var(--amber-dim); }
 
+  /* ── NAV ── */
   nav {
     position:fixed; top:0; left:0; right:0; z-index:500;
     height:54px; background:rgba(2,4,7,0.97);
@@ -67,6 +68,7 @@
   .status-dot.error   { background:var(--red); }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
+  /* ── HERO ── */
   .hero-strip { margin-top:54px; padding:3rem 2.5rem 2.5rem; border-bottom:1px solid var(--border-bright); position:relative; overflow:hidden; }
   .hero-bg { position:absolute; inset:0; background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px); background-size:48px 48px; mask-image:radial-gradient(ellipse 80% 100% at 10% 50%,black 20%,transparent 80%); }
   .hero-inner { position:relative; max-width:1200px; margin:0 auto; }
@@ -80,9 +82,11 @@
   .day-num { font-family:'Orbitron',monospace; font-size:clamp(48px,8vw,80px); font-weight:900; color:rgba(232,160,32,0.12); line-height:1; letter-spacing:4px; }
   .day-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:3px; color:var(--text-dim); text-transform:uppercase; text-align:right; }
 
+  /* ── LAYOUT ── */
   .main-wrap { flex:1; background:var(--border-mid); }
   .main-layout { max-width:1400px; margin:0 auto; display:grid; grid-template-columns:280px 1fr; gap:1px; min-height:calc(100vh - 210px); }
 
+  /* ── SIDEBAR ── */
   .sidebar { background:var(--surface); display:flex; flex-direction:column; }
   .sidebar-header { padding:1.25rem; border-bottom:1px solid var(--border-bright); display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
   .sidebar-title { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:3px; color:var(--amber-dim); text-transform:uppercase; }
@@ -100,6 +104,7 @@
   .project-tags { display:flex; gap:4px; flex-wrap:wrap; }
   .ptag { font-family:'Share Tech Mono',monospace; font-size:7px; letter-spacing:1px; padding:2px 6px; border:1px solid var(--border-bright); color:var(--text-dim); text-transform:uppercase; }
 
+  /* ── RIGHT PANEL ── */
   .right-panel { display:flex; flex-direction:column; background:var(--surface); height:100%; }
   .viewer-panel { display:flex; flex-direction:column; height:380px; flex-shrink:0; border-bottom:2px solid var(--border-bright); }
   .viewer-topbar { padding:0.75rem 1.5rem; border-bottom:1px solid var(--border-bright); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; flex-shrink:0; }
@@ -117,6 +122,7 @@
   .desc-text.placeholder { color:var(--text-dim); }
   .desc-meta { font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-dim); letter-spacing:1px; white-space:nowrap; flex-shrink:0; }
 
+  /* ── CODE VIEWER ── */
   .code-wrap { flex:1; overflow:auto; }
   .code-table { display:table; width:100%; border-collapse:collapse; }
   .code-row { display:table-row; }
@@ -126,15 +132,14 @@
   .code-line-cell { display:table-cell; padding:0 1.5rem; font-family:'Share Tech Mono',monospace; font-size:13px; line-height:1.65; color:var(--text-bright); vertical-align:top; white-space:pre; }
   .code-row:first-child .code-line-cell { padding-top:1rem; }
   .code-row:last-child  .code-line-cell { padding-bottom:1rem; }
-  .kw  { color:#d08060; } .str { color:#80c870; }
-  .cm  { color:#4a5a40; font-style:italic; }
-  .num { color:#d8a060; } .bi  { color:#c080d0; }
+  .kw { color:#d08060; } .str { color:#80c870; } .cm { color:#4a5a40; font-style:italic; } .num { color:#d8a060; } .bi { color:#c080d0; }
 
   .empty-state { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; min-height:200px; gap:1rem; padding:3rem; }
   .empty-icon  { font-family:'Share Tech Mono',monospace; font-size:32px; color:var(--border-bright); letter-spacing:4px; }
   .empty-title { font-family:'Orbitron',monospace; font-size:13px; color:var(--border-bright); letter-spacing:3px; }
   .empty-sub   { font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--text-dim); letter-spacing:1px; text-align:center; }
 
+  /* ── DESKTOP TERMINAL ── */
   .terminal-panel { display:flex; flex-direction:column; background:#000; flex:1; min-height:300px; }
   .terminal-topbar { padding:0.6rem 1.5rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
   .terminal-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:3px; color:var(--text-dim); text-transform:uppercase; display:flex; align-items:center; gap:8px; }
@@ -146,56 +151,122 @@
   .exec-time { font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-dim); letter-spacing:1px; }
   .btn-clear-term { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:1px; padding:4px 10px; background:transparent; color:var(--text-dim); border:1px solid var(--border); cursor:pointer; text-transform:uppercase; transition:color 0.2s; }
   .btn-clear-term:hover { color:var(--amber); }
-
   #terminalBody { flex:1; overflow-y:auto; padding:1rem 1.5rem; font-family:'Share Tech Mono',monospace; font-size:12px; line-height:1.9; height:380px; max-height:380px; }
+
+  /* ── SHARED TERMINAL LINE STYLES ── */
   .t-out  { display:block; color:var(--green);    white-space:pre-wrap; word-break:break-word; }
   .t-err  { display:block; color:var(--red);      white-space:pre-wrap; word-break:break-word; }
   .t-sys  { display:block; color:var(--text-dim); white-space:pre-wrap; }
   .t-echo { display:block; color:var(--text-mid); white-space:pre-wrap; }
-
   .t-input-row { display:flex; align-items:baseline; margin:1px 0; }
   .t-prompt-label { font-family:'Share Tech Mono',monospace; font-size:12px; color:var(--amber); white-space:pre; flex-shrink:0; }
-  .t-prompt-field { font-family:'Share Tech Mono',monospace; font-size:12px; background:transparent; border:none; outline:none; border-bottom:1px solid var(--amber-dim); color:var(--amber-glow); caret-color:var(--amber); flex:1; min-width:80px; padding:0 4px 1px; }
+  .t-prompt-field { font-family:'Share Tech Mono',monospace; font-size:12px; background:transparent; border:none; outline:none; border-bottom:1px solid var(--amber-dim); color:var(--amber-glow); caret-color:var(--amber); flex:1; min-width:60px; max-width:200px; padding:0 4px 1px; }
   .t-prompt-field:focus { border-bottom-color:var(--amber); }
 
-  .loading-overlay { position:fixed; inset:0; background:rgba(2,4,7,0.96); z-index:9000; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1.5rem; }
+  /* ── MOBILE TERMINAL MODAL ── */
+  .mobile-modal {
+    display:none;
+    position:fixed; inset:0; z-index:8000;
+    flex-direction:column;
+    background:#000;
+  }
+  .mobile-modal.open { display:flex; }
+  .mobile-modal-header {
+    padding:0.75rem 1rem;
+    border-bottom:1px solid var(--border-bright);
+    background:var(--surface);
+    display:flex; align-items:center; justify-content:space-between;
+    flex-shrink:0;
+  }
+  .mobile-modal-title {
+    font-family:'Share Tech Mono',monospace; font-size:10px;
+    letter-spacing:3px; color:var(--amber-dim); text-transform:uppercase;
+    display:flex; align-items:center; gap:8px;
+  }
+  .mobile-modal-actions { display:flex; align-items:center; gap:0.75rem; }
+  .modal-exec-time { font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-dim); }
+  .btn-modal-clear {
+    font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:1px;
+    padding:5px 10px; background:transparent; color:var(--text-dim);
+    border:1px solid var(--border); cursor:pointer; text-transform:uppercase;
+  }
+  .btn-modal-close {
+    font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:1px;
+    padding:5px 14px; background:var(--amber-dim); color:var(--amber-glow);
+    border:none; cursor:pointer; text-transform:uppercase; font-weight:700;
+  }
+  #modalTermBody {
+    flex:1; overflow-y:auto; padding:1rem 1.25rem;
+    font-family:'Share Tech Mono',monospace; font-size:13px; line-height:1.9;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  /* ── LOADING OVERLAY ── */
+  .loading-overlay { position:fixed; inset:0; background:rgba(2,4,7,0.96); z-index:9500; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1.5rem; }
   .loading-overlay.hidden { display:none; }
   .loading-title { font-family:'Orbitron',monospace; font-size:14px; font-weight:700; color:var(--amber); letter-spacing:4px; text-transform:uppercase; }
   .loading-bar-wrap { width:300px; height:2px; background:var(--border-bright); }
   .loading-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--amber-dim),var(--amber)); transition:width 0.5s ease; }
   .loading-msg { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--text-mid); text-transform:uppercase; }
 
+  /* ── FOOTER ── */
   footer { background:var(--bg); border-top:1px solid var(--border-bright); padding:1.5rem 2.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
   .footer-logo { font-family:'Orbitron',monospace; font-size:11px; letter-spacing:4px; color:var(--text-dim); text-decoration:none; }
   .footer-links { display:flex; gap:2rem; }
   .footer-links a { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--text-dim); text-decoration:none; text-transform:uppercase; transition:color 0.2s; }
   .footer-links a:hover { color:var(--amber); }
 
-	@media (max-width:800px) {
-		.main-layout { grid-template-columns:1fr; }
-		.day-counter { display:none; }
-		.viewer-panel { height:260px; }
-		.terminal-panel { min-height:250px; }
-		#terminalBody { height:210px; max-height:210px; }
-		.viewer-topbar { flex-direction:column; align-items:flex-start; gap:0.5rem; padding:0.5rem 1rem; }
-		.btn-run { padding:6px 14px; font-size:9px; }
-		.btn-copy { padding:6px 10px; font-size:9px; }
-		.viewer-file { font-size:9px; }
-		.viewer-file .filename { max-width:120px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-		.desc-bar { flex-direction:column; align-items:flex-start; gap:0.25rem; }
-		.t-prompt-field { max-width:120px; min-width:80px; }
-	}
-
+  /* ── MOBILE STYLES ── */
+  @media (max-width:800px) {
+    .main-layout { grid-template-columns:1fr; }
+    .day-counter { display:none; }
+    /* On mobile, hide the desktop terminal — we use the modal instead */
+    .terminal-panel { display:none; }
+    /* Code viewer takes remaining space */
+    .viewer-panel { height:auto; flex:1; }
+    /* Topbar stacks on mobile */
+    .viewer-topbar { flex-direction:column; align-items:flex-start; gap:0.5rem; padding:0.5rem 1rem; }
+    .viewer-actions { width:100%; }
+    .btn-run  { padding:8px 16px; font-size:10px; flex:1; justify-content:center; }
+    .btn-copy { padding:8px 12px; font-size:10px; }
+    /* Desc bar stacks */
+    .desc-bar { flex-direction:column; align-items:flex-start; gap:0.25rem; }
+    .desc-meta { white-space:normal; }
+    /* Input field stays contained */
+    .t-prompt-field { max-width:160px; }
+    /* Nav compact */
+    .nav-back { font-size:9px; letter-spacing:1px; }
+  }
 </style>
 </head>
 <body>
 
+<!-- LOADING OVERLAY -->
 <div class="loading-overlay" id="loadingOverlay">
   <div class="loading-title">Initializing Python Runtime</div>
   <div class="loading-bar-wrap"><div class="loading-bar-fill" id="loadingBar"></div></div>
   <div class="loading-msg" id="loadingMsg">Loading Pyodide engine...</div>
 </div>
 
+<!-- MOBILE TERMINAL MODAL -->
+<div class="mobile-modal" id="mobileModal">
+  <div class="mobile-modal-header">
+    <div class="mobile-modal-title">
+      <div class="out-dot" id="modalOutDot"></div>
+      Terminal
+    </div>
+    <div class="mobile-modal-actions">
+      <span class="modal-exec-time" id="modalExecTime"></span>
+      <button class="btn-modal-clear" onclick="clearModalTerm()">Clear</button>
+      <button class="btn-modal-close" onclick="closeMobileModal()">✕ Close</button>
+    </div>
+  </div>
+  <div id="modalTermBody">
+    <span class="t-sys">// Waiting to run...</span>
+  </div>
+</div>
+
+<!-- NAV -->
 <nav>
   <a href="https://colinjacobs.github.io" class="nav-logo">Colin Jacobs</a>
   <div class="nav-right">
@@ -207,6 +278,7 @@
   </div>
 </nav>
 
+<!-- HERO -->
 <div class="hero-strip">
   <div class="hero-bg"></div>
   <div class="hero-inner">
@@ -221,6 +293,7 @@
   </div>
 </div>
 
+<!-- MAIN -->
 <div class="main-wrap">
   <div class="main-layout">
 
@@ -261,6 +334,7 @@
         </div>
       </div>
 
+      <!-- Desktop terminal (hidden on mobile) -->
       <div class="terminal-panel">
         <div class="terminal-topbar">
           <div class="terminal-label">
@@ -292,6 +366,76 @@
 <script>
 let pyodide     = null;
 let activeIndex = null;
+
+// ── DETECT MOBILE ──
+function isMobile() { return window.innerWidth <= 800; }
+
+// ── MOBILE MODAL ──
+function openMobileModal() {
+  document.getElementById('mobileModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileModal() {
+  document.getElementById('mobileModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function clearModalTerm() {
+  document.getElementById('modalTermBody').innerHTML = '<span class="t-sys">// Output cleared.</span>';
+  document.getElementById('modalOutDot').className  = 'out-dot';
+}
+
+// ── TERMINAL HELPERS ──
+// Both desktop and mobile use these — they route to the right container
+function getTermBody() {
+  return isMobile()
+    ? document.getElementById('modalTermBody')
+    : document.getElementById('terminalBody');
+}
+function termAppend(text, cls) {
+  const tb = getTermBody();
+  const el = document.createElement('span');
+  el.className   = cls;
+  el.textContent = text;
+  tb.appendChild(el);
+  tb.scrollTop = tb.scrollHeight;
+}
+function clearTerminal() {
+  document.getElementById('terminalBody').innerHTML  = '<span class="t-sys">// Click Run to execute the program.</span>';
+  document.getElementById('outDot').className        = 'out-dot';
+  document.getElementById('execTime').textContent    = '';
+  document.getElementById('modalTermBody').innerHTML = '<span class="t-sys">// Click Run to execute the program.</span>';
+  document.getElementById('modalOutDot').className   = 'out-dot';
+  document.getElementById('modalExecTime').textContent = '';
+}
+
+// ── INPUT PROMPT ──
+function showInputPrompt(promptText) {
+  return new Promise(resolve => {
+    const tb    = getTermBody();
+    const row   = document.createElement('div');
+    row.className = 't-input-row';
+    const label = document.createElement('span');
+    label.className   = 't-prompt-label';
+    label.textContent = promptText;
+    const field = document.createElement('input');
+    field.type         = 'text';
+    field.className    = 't-prompt-field';
+    field.autocomplete = 'off';
+    field.spellcheck   = false;
+    row.appendChild(label);
+    row.appendChild(field);
+    tb.appendChild(row);
+    tb.scrollTop = tb.scrollHeight;
+    setTimeout(() => field.focus(), 20);
+    field.addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      const val = field.value;
+      row.remove();
+      termAppend(promptText + val + '\n', 't-echo');
+      resolve(val);
+    });
+  });
+}
 
 // ── SIDEBAR ──
 (function init() {
@@ -376,82 +520,41 @@ function copyCode() {
   });
 }
 
-// ── TERMINAL ──
-function termAppend(text, cls) {
-  const tb = document.getElementById('terminalBody');
-  const el = document.createElement('span');
-  el.className   = cls;
-  el.textContent = text;
-  tb.appendChild(el);
-  tb.scrollTop = tb.scrollHeight;
-}
-function clearTerminal() {
-  document.getElementById('terminalBody').innerHTML = '<span class="t-sys">// Click Run to execute the program.</span>';
-  document.getElementById('outDot').className      = 'out-dot';
-  document.getElementById('execTime').textContent  = '';
-}
-
-// ── INPUT PROMPT ──
-function showInputPrompt(promptText) {
-  return new Promise(resolve => {
-    const tb    = document.getElementById('terminalBody');
-    const row   = document.createElement('div');
-    row.className = 't-input-row';
-    const label = document.createElement('span');
-    label.className   = 't-prompt-label';
-    label.textContent = promptText;
-    const field = document.createElement('input');
-    field.type         = 'text';
-    field.className    = 't-prompt-field';
-    field.autocomplete = 'off';
-    field.spellcheck   = false;
-    row.appendChild(label);
-    row.appendChild(field);
-    tb.appendChild(row);
-    tb.scrollTop = tb.scrollHeight;
-    setTimeout(() => field.focus(), 20);
-    field.addEventListener('keydown', e => {
-      if (e.key !== 'Enter') return;
-      const val = field.value;
-      row.remove();
-      termAppend(promptText + val + '\n', 't-echo');
-      resolve(val);
-    });
-  });
-}
-
 // ── RUN ──
 async function runCode() {
   if (!pyodide || activeIndex === null) return;
   const code   = PROJECTS[activeIndex].code || '';
   const runBtn = document.getElementById('runBtn');
-  const dot    = document.getElementById('outDot');
+
+  // On mobile: open the full-screen modal before anything else
+  if (isMobile()) {
+    document.getElementById('modalTermBody').innerHTML = '';
+    document.getElementById('modalOutDot').className  = 'out-dot run';
+    document.getElementById('modalExecTime').textContent = '';
+    openMobileModal();
+  } else {
+    document.getElementById('terminalBody').innerHTML = '';
+    document.getElementById('outDot').className       = 'out-dot run';
+    document.getElementById('execTime').textContent   = '';
+  }
 
   runBtn.disabled    = true;
   runBtn.textContent = '⏳ Running...';
-  dot.className      = 'out-dot run';
-  document.getElementById('terminalBody').innerHTML = '';
-  document.getElementById('execTime').textContent   = '';
   termAppend(`// ${PROJECTS[activeIndex].name}\n\n`, 't-sys');
 
   const t0 = performance.now();
 
-  // Pass the user's code to Python as a global string — no indenting needed
   pyodide.globals.set('_user_code', code);
-
-  // Pass JS callbacks as globals
   pyodide.globals.set('_write_stdout', (s) => {
     termAppend(s, 't-out');
-    document.getElementById('terminalBody').scrollTop = 9999;
+    getTermBody().scrollTop = 9999;
   });
   pyodide.globals.set('_write_stderr', (s) => {
     termAppend(s, 't-err');
-    document.getElementById('terminalBody').scrollTop = 9999;
+    getTermBody().scrollTop = 9999;
   });
-  // Inline terminal input — returns a JS Promise that Python awaits
   pyodide.globals.set('_js_input', (prompt) => showInputPrompt(prompt == null ? '' : String(prompt)));
 
-  // Setup stdout/stderr redirect and async input()
   pyodide.runPython(`
 import sys, builtins
 
@@ -471,9 +574,7 @@ async def _async_input(prompt=''):
 builtins.input = _async_input
 `);
 
-  // AST rewriter: auto-inserts 'await' before every input() call in user code
-  // so plain input() in projects.js works without modification.
-    let hasError = false;
+  let hasError = false;
   try {
     await pyodide.runPythonAsync(`
 import ast, traceback, builtins
@@ -510,7 +611,6 @@ await _run()
     hasError = true;
   }
 
-  // Restore builtins
   pyodide.runPython(`
 import sys, builtins
 sys.stdout = sys.__stdout__
@@ -520,9 +620,17 @@ builtins.input = input
 
   const ms = (performance.now() - t0).toFixed(1);
   termAppend(`\n// Finished in ${ms}ms`, 't-sys');
-  document.getElementById('execTime').textContent = `${ms}ms`;
-  const tb = document.getElementById('terminalBody');
-  dot.className = (hasError || tb.querySelector('.t-err')) ? 'out-dot err' : 'out-dot ok';
+
+  if (isMobile()) {
+    document.getElementById('modalExecTime').textContent = `${ms}ms`;
+    const tb = document.getElementById('modalTermBody');
+    document.getElementById('modalOutDot').className = (hasError || tb.querySelector('.t-err')) ? 'out-dot err' : 'out-dot ok';
+  } else {
+    document.getElementById('execTime').textContent = `${ms}ms`;
+    const tb = document.getElementById('terminalBody');
+    document.getElementById('outDot').className = (hasError || tb.querySelector('.t-err')) ? 'out-dot err' : 'out-dot ok';
+  }
+
   runBtn.disabled    = false;
   runBtn.textContent = '▶ Run';
 }
