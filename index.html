@@ -100,8 +100,8 @@
   .project-tags { display:flex; gap:4px; flex-wrap:wrap; }
   .ptag { font-family:'Share Tech Mono',monospace; font-size:7px; letter-spacing:1px; padding:2px 6px; border:1px solid var(--border-bright); color:var(--text-dim); text-transform:uppercase; }
 
-  .right-panel { display:flex; flex-direction:column; background:var(--surface); }
-  .viewer-panel { display:flex; flex-direction:column; flex:1; min-height:0; border-bottom:2px solid var(--border-bright); }
+  .right-panel { display:flex; flex-direction:column; background:var(--surface); height:100%; }
+  .viewer-panel { display:flex; flex-direction:column; height:380px; flex-shrink:0; border-bottom:2px solid var(--border-bright); }
   .viewer-topbar { padding:0.75rem 1.5rem; border-bottom:1px solid var(--border-bright); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; flex-shrink:0; }
   .viewer-file { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--text-mid); display:flex; align-items:center; gap:8px; }
   .viewer-file .filename { color:var(--amber-glow); }
@@ -117,7 +117,7 @@
   .desc-text.placeholder { color:var(--text-dim); }
   .desc-meta { font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-dim); letter-spacing:1px; white-space:nowrap; flex-shrink:0; }
 
-  .code-wrap { flex:1; overflow:auto; min-height:200px; }
+  .code-wrap { flex:1; overflow:auto; }
   .code-table { display:table; width:100%; border-collapse:collapse; }
   .code-row { display:table-row; }
   .line-num-cell { display:table-cell; width:48px; min-width:48px; background:var(--surface2); border-right:1px solid var(--border); font-family:'Share Tech Mono',monospace; font-size:12px; line-height:1.65; color:var(--text-dim); text-align:right; padding:0 10px 0 0; vertical-align:top; user-select:none; }
@@ -135,7 +135,7 @@
   .empty-title { font-family:'Orbitron',monospace; font-size:13px; color:var(--border-bright); letter-spacing:3px; }
   .empty-sub   { font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--text-dim); letter-spacing:1px; text-align:center; }
 
-  .terminal-panel { display:flex; flex-direction:column; background:#000; flex:1; min-height:240px; }
+  .terminal-panel { display:flex; flex-direction:column; background:#000; flex:1; min-height:300px; }
   .terminal-topbar { padding:0.6rem 1.5rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
   .terminal-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:3px; color:var(--text-dim); text-transform:uppercase; display:flex; align-items:center; gap:8px; }
   .out-dot { width:6px; height:6px; border-radius:50%; background:var(--text-dim); transition:background 0.3s; }
@@ -147,7 +147,7 @@
   .btn-clear-term { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:1px; padding:4px 10px; background:transparent; color:var(--text-dim); border:1px solid var(--border); cursor:pointer; text-transform:uppercase; transition:color 0.2s; }
   .btn-clear-term:hover { color:var(--amber); }
 
-  #terminalBody { flex:1; overflow-y:auto; padding:1rem 1.5rem; font-family:'Share Tech Mono',monospace; font-size:12px; line-height:1.9; min-height:140px; max-height:320px; }
+  #terminalBody { flex:1; overflow-y:auto; padding:1rem 1.5rem; font-family:'Share Tech Mono',monospace; font-size:12px; line-height:1.9; height:380px; max-height:380px; }
   .t-out  { display:block; color:var(--green);    white-space:pre-wrap; word-break:break-word; }
   .t-err  { display:block; color:var(--red);      white-space:pre-wrap; word-break:break-word; }
   .t-sys  { display:block; color:var(--text-dim); white-space:pre-wrap; }
@@ -437,13 +437,10 @@ async function runCode() {
     termAppend(s, 't-err');
     document.getElementById('terminalBody').scrollTop = 9999;
   });
-  pyodide.globals.set('_js_input', (prompt) => {
-  const value = window.prompt(prompt == null ? '' : String(prompt));
-  return value === null ? '' : value;
-});
+  // Inline terminal input — returns a JS Promise that Python awaits
+  pyodide.globals.set('_js_input', (prompt) => showInputPrompt(prompt == null ? '' : String(prompt)));
 
-  // One-time setup: redirect stdout/stderr and override input()
-  // This runs synchronously and cleanly before any user code executes
+  // Setup stdout/stderr redirect and async input()
   pyodide.runPython(`
 import sys, builtins
 
@@ -456,27 +453,40 @@ class _W:
 sys.stdout = _W(_write_stdout)
 sys.stderr = _W(_write_stderr)
 
-def _patched_input(prompt=''):
-    val = _js_input(str(prompt))
-    sys.stdout.write(str(prompt) + str(val) + "\\n")
-    return str(val)
+async def _async_input(prompt=''):
+    sys.stdout.flush()
+    return await _js_input(str(prompt))
 
-builtins.input = _patched_input
+builtins.input = _async_input
 `);
 
-  // Run the user code via exec() inside an async function.
-  // Passing code as a pre-stored global string avoids ALL escaping/indenting issues.
-  let hasError = false;
+  // AST rewriter: auto-inserts 'await' before every input() call in user code
+  // so plain input() in projects.js works without modification.
+    let hasError = false;
   try {
     await pyodide.runPythonAsync(`
-import traceback, builtins
+import ast, traceback, builtins
+
+class _AwaitInputs(ast.NodeTransformer):
+    def visit_Call(self, node):
+        self.generic_visit(node)
+        if isinstance(node.func, ast.Name) and node.func.id == 'input':
+            return ast.Await(value=node)
+        return node
 
 async def _run():
     try:
-        # compile() + exec() runs the code at module level —
-        # preserves the original indentation exactly as written
-        _compiled = compile(_user_code, '<script>', 'exec')
-        exec(_compiled, {'__name__': '__main__', 'input': builtins.input})
+        tree = ast.parse(_user_code)
+        tree = _AwaitInputs().visit(tree)
+        ast.fix_missing_locations(tree)
+        wrapper = ast.parse("async def _user_main(): pass")
+        func_def = wrapper.body[0]
+        func_def.body = tree.body if tree.body else [ast.Pass()]
+        ast.fix_missing_locations(wrapper)
+        _code_obj = compile(wrapper, '<user_code>', 'exec')
+        _ns = {'__name__': '__main__', 'input': builtins.input}
+        exec(_code_obj, _ns)
+        await _ns['_user_main']()
     except SystemExit:
         pass
     except Exception:
