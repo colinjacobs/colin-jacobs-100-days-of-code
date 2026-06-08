@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Colin Jacobs — 100 Days of Code</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -174,7 +174,12 @@
   @media (max-width:800px) {
     .main-layout { grid-template-columns:1fr; }
     .day-counter { display:none; }
-  }
+    .viewer-panel { height:240px; }
+    .code-wrap { overflow:auto; }
+    .terminal-panel { min-height:250px; }
+    #terminalBody { height:210px; max-height:210px; }
+    .viewer-topbar { flex-wrap:wrap; gap:0.5rem; }
+}
 </style>
 </head>
 <body>
