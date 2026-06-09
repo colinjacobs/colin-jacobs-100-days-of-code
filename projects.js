@@ -93,7 +93,7 @@ else:
   {
     day: 4,
     name: "Rock, paper, scissors",
-    desc: "Classic game where you select the number of rounds you want to play",
+    desc: "Classic game of chance. Lets you select the number of rounds you want to play.",
     tags: ["lists", "while loops", "index", "index"],
     code: `# Day 4 - Rock, Paper, Scissors
 import random
