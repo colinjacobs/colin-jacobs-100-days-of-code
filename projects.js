@@ -67,13 +67,13 @@ else:
 
 print("Welcome to Treasure Island.")
 print("Your mission is to find the treasure.")
-print("You arrive at a crossroads. The right path leads across a bridge. The left path leads to the lake.")
-choice1= input("Which path will you choose? Type 'left' or 'right'.")
+print("You arrive at a crossroads. The right path leads across a bridge. The left path leads to the lake.").lower()
+choice1= input("Which path will you choose? Type 'left' or 'right'.").lower()
 if choice1 == "left":
     choice2 = input("You arrive at a lake. Will you swim across or wait for a boat? Type 'swim' or 'wait'.")
     if choice2 == "wait":
         print("A boat arrives to take you across. You arrive at a building with 3 doors.")
-        choice3=input("Which will you choose? Type 'red', 'yellow' or 'blue'.")
+        choice3=input("Which will you choose? Type 'red', 'yellow' or 'blue'.").lower()
         if choice3=="red":
             print("Burned by fire. Game over")
         elif choice3=="blue":
