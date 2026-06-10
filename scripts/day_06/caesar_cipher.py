@@ -7,8 +7,8 @@ while answer != 'no':
     shift = int(input("Type the shift number:\n"))
 
     encrypt(text,shift,action)
-    answer = input("Would you like to encode or decode another word? Type 'yes' or 'no'")
+    answer = input("Would you like to encode or decode another word? Type 'yes' or 'no'").lower()
 
     if answer != 'yes' and answer != 'no':
-        answer = input("I didn't understand. Do you want to encode/decode another word? Type 'yes' or 'no'.")
+        answer = input("I didn't understand. Do you want to encode/decode another word? Type 'yes' or 'no'.").lower()
 print('Goodbye!')
