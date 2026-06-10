@@ -2,7 +2,7 @@ from encrypt import encrypt
 answer = 'yes'
 
 while answer != 'no':
-    action = input("Do you want to encode or decode the text?").lower()
+    action = input("Do you want to encode or decode the text?\n").lower()
     text = input("Type your message:\n").lower()
     shift = int(input("Type the shift number:\n"))
 
