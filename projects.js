@@ -68,12 +68,12 @@ else:
 print("Welcome to Treasure Island.")
 print("Your mission is to find the treasure.")
 print("You arrive at a crossroads. The right path leads across a bridge. The left path leads to the lake.")
-choice1= input("Which path will you choose? Type 'left' or 'right'.").lower()
+choice1= input("Which path will you choose? Type 'left' or 'right'.")
 if choice1 == "left":
     choice2 = input("You arrive at a lake. Will you swim across or wait for a boat? Type 'swim' or 'wait'.")
     if choice2 == "wait":
         print("A boat arrives to take you across. You arrive at a building with 3 doors.")
-        choice3=input("Which will you choose? Type 'red', 'yellow' or 'blue'.").lower()
+        choice3=input("Which will you choose? Type 'red', 'yellow' or 'blue'.")
         if choice3=="red":
             print("Burned by fire. Game over")
         elif choice3=="blue":
@@ -93,7 +93,7 @@ else:
   {
     day: 4,
     name: "Rock, paper, scissors",
-    desc: "Classic game of chance. Lets you select the number of rounds you want to play.",
+    desc: "Classic game where you select the number of rounds you want to play",
     tags: ["lists", "while loops", "index", "index"],
     code: `# Day 4 - Rock, Paper, Scissors
 import random
@@ -175,5 +175,16 @@ if computer_score > player_score:
     print("Computer wins the match!")
 else:
     print("Player wins the match!")`
-  }
+  },
+
+  {
+  day: 6,
+  name: "Caesar Cipher",
+  desc: "Encode or decode messages using a shift cipher.",
+  tags: ["functions", "loops", "strings"],
+  files: [
+    { name: "caesar_cipher.py", path: "scripts/day_06/caesar_cipher.py" },
+    { name: "encrypt.py",       path: "scripts/day_06/encrypt.py" }
+  ]
+},
 ];
