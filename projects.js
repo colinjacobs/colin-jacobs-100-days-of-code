@@ -196,4 +196,5 @@ else:
     { name: "encrypt.py",       path: "scripts/day_06/encrypt.py" }
   ]
 },
+
 ];
