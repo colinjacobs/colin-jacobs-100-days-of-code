@@ -196,5 +196,14 @@ else:
     { name: "encrypt.py",       path: "scripts/day_06/encrypt.py" }
   ]
 },
-
+  {
+    day: 11,
+  name: "Blackjack",
+  desc: "A friendly game of blackjack.",
+  tags: ["functions", "return", "sort"],
+  files: [
+    { name: "blackjack.py", path: "scripts/day_11/blackjack.py" },
+    { name: "art.py",       path: "scripts/day_11/art.py" }
+  ]
+  },
 ];
