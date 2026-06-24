@@ -119,8 +119,23 @@
   .ptag { font-family:'Share Tech Mono',monospace; font-size:7px; letter-spacing:1px; padding:2px 6px; border:1px solid var(--border-bright); color:var(--text-dim); text-transform:uppercase; }
 
   /* ── RIGHT PANEL ── */
-  .right-panel { display:flex; flex-direction:column; background:var(--surface); height:100%; min-width:0; overflow:hidden; }
-  .viewer-panel { display:flex; flex-direction:column; height:380px; flex-shrink:0; border-bottom:2px solid var(--border-bright); overflow:hidden; }
+  .right-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.viewer-panel {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  flex-shrink: 0;
+  border-bottom: 2px solid var(--border-bright);
+  overflow: hidden;
+}
 
   /* ── FILE TABS ── */
   .file-tabs {
