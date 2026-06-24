@@ -83,8 +83,22 @@
   .day-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:3px; color:var(--text-dim); text-transform:uppercase; text-align:right; }
 
   /* ── LAYOUT ── */
-  .main-wrap { flex:1; background:var(--border-mid); overflow:hidden; min-height:0; }
-  .main-layout { max-width:1400px; margin:0 auto; display:grid; grid-template-columns:280px 1fr; gap:1px; height:100%; }
+.main-wrap {
+  flex: 1;
+  background: var(--border-mid);
+  overflow: hidden;
+  min-height: 0;
+  height: calc(100vh - 54px - 155px - 72px);
+}
+
+.main-layout {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1px;
+  height: 100%;
+}
 
   /* ── SIDEBAR ── */
   .sidebar { background:var(--surface); display:flex; flex-direction:column; }
