@@ -37,8 +37,8 @@
   body {
     background:var(--bg); color:var(--text);
     font-family:'Rajdhani',sans-serif;
-    overflow-x:hidden; overflow-y:hidden; cursor:crosshair;
-    height:100vh; min-height:100vh; display:flex; flex-direction:column;
+    overflow-x:hidden; overflow-y:auto; cursor:crosshair;
+    min-height:100vh; display:flex; flex-direction:column;
   }
   body::before {
     content:''; position:fixed; inset:0;
@@ -83,7 +83,7 @@
   .day-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:3px; color:var(--text-dim); text-transform:uppercase; text-align:right; }
 
   /* ── LAYOUT ── */
-  .main-wrap { flex:1 1 0; background:var(--border-mid); overflow:hidden; min-height:0; }
+  .main-wrap { background:var(--border-mid); overflow:hidden; height:calc(100vh - 54px - 54px); min-height:520px; flex-shrink:0; }
   .main-layout { max-width:1400px; margin:0 auto; display:grid; grid-template-columns:280px 1fr; grid-template-rows:1fr; gap:1px; height:100%; min-height:0; }
 
   /* ── SIDEBAR ── */
@@ -106,7 +106,7 @@
 
   /* ── RIGHT PANEL ── */
   .right-panel { display:flex; flex-direction:column; background:var(--surface); height:100%; min-height:0; min-width:0; overflow:hidden; }
-  .viewer-panel { display:flex; flex-direction:column; height:380px; flex-shrink:0; border-bottom:2px solid var(--border-bright); overflow:hidden; }
+  .viewer-panel { display:flex; flex-direction:column; height:300px; flex-shrink:0; border-bottom:2px solid var(--border-bright); overflow:hidden; }
 
   /* ── FILE TABS ── */
   .file-tabs {
@@ -197,7 +197,7 @@
   @keyframes loadpulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
 
   /* ── DESKTOP TERMINAL ── */
-  .terminal-panel { display:flex; flex-direction:column; background:#000; flex:1 1 0; min-height:0; overflow:hidden; }
+  .terminal-panel { display:flex; flex-direction:column; background:#000; flex:1; min-height:0; overflow:hidden; }
   .terminal-topbar { padding:0.6rem 1.5rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
   .terminal-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:3px; color:var(--text-dim); text-transform:uppercase; display:flex; align-items:center; gap:8px; }
   .out-dot { width:6px; height:6px; border-radius:50%; background:var(--text-dim); transition:background 0.3s; }
@@ -208,7 +208,7 @@
   .exec-time { font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-dim); letter-spacing:1px; }
   .btn-clear-term { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:1px; padding:4px 10px; background:transparent; color:var(--text-dim); border:1px solid var(--border); cursor:pointer; text-transform:uppercase; transition:color 0.2s; }
   .btn-clear-term:hover { color:var(--amber); }
-  #terminalBody { flex:1 1 0; overflow-y:auto; overflow-x:auto; padding:1rem 1.5rem 2rem; font-family:'Share Tech Mono',monospace; font-size:12px; line-height:1.9; min-height:0; display:block; }
+  #terminalBody { flex:1; overflow-y:auto; overflow-x:auto; padding:1rem 1.5rem 2rem; font-family:'Share Tech Mono',monospace; font-size:12px; line-height:1.9; min-height:0; display:block; }
 
   /* ── SHARED TERMINAL LINE STYLES ── */
   .t-out  { display:block; color:var(--green);    white-space:pre-wrap; word-break:break-word; }
@@ -257,7 +257,6 @@
   .sidebar-toggle { display:none; }
 
   @media (max-width:800px) {
-    body { height:auto; min-height:100vh; overflow-y:auto; }
     .main-layout { grid-template-columns:1fr; display:flex; flex-direction:column; min-height:calc(100vh - 180px); }
     .day-counter { display:none; }
     .terminal-panel { display:none; }
@@ -424,7 +423,7 @@
 
 <footer>
   <a href="https://colinjacobs.github.io" class="footer-logo">Colin Jacobs</a>
-  <p class="hero-desc">Version Number 1.02 </p>
+  <p class="hero-desc">Version Number 1.03 </p>
   <div class="footer-links">
     <a href="https://colinjacobs.github.io">Portfolio</a>
     <a href="https://github.com/TheLabyrinthMind101" target="_blank">GitHub</a>
