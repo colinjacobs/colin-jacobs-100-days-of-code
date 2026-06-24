@@ -41,7 +41,7 @@ while again != 'n':
 
     print(f'Your hand: {player_hand}')
     print(f'Dealer hand: {dealer_hand}')
-    move = input('Do you want to stand or hit? Type s for stand or h for hit.')
+    move = input('Do you want to stand or hit? Type s for stand or h for hit.').lower()
     while move != 's':
         player_hand.append(random.choice(cards))
         player_hand.sort()
@@ -49,12 +49,12 @@ while again != 'n':
         player_current_score = current_score(player_hand)
         #print(f'Current score = {current_score(player_hand,player_current_score)}')
         if player_current_score <= 21:
-            move = input('Do you want to stand or hit? Type s for stand or h for hit.')
+            move = input('Do you want to stand or hit? Type s for stand or h for hit.').lower()
         elif player_current_score > 21:
             if 11 in player_hand:
                 player_hand[len(player_hand)-1] = 1
                 current_score(dealer_hand)
-                move = input('Do you want to stand or hit? Type s for stand or h for hit.')
+                move = input('Do you want to stand or hit? Type s for stand or h for hit.').lower()
             else:
                 print('You went over 21. You lose!')
                 player_money -= wager
@@ -92,5 +92,5 @@ while again != 'n':
     if player_money == 0:
         break
     print(f'You currently have {player_money}.')
-    again = input('Would you like to play again? Type y for yes or n for no.')
+    again = input('Would you like to play again? Type y for yes or n for no.').lower()
 print(f'Your final amount is {player_money}')
