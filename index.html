@@ -208,7 +208,17 @@
   .exec-time { font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-dim); letter-spacing:1px; }
   .btn-clear-term { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:1px; padding:4px 10px; background:transparent; color:var(--text-dim); border:1px solid var(--border); cursor:pointer; text-transform:uppercase; transition:color 0.2s; }
   .btn-clear-term:hover { color:var(--amber); }
-  #terminalBody { flex:1; overflow-y:auto; padding:1rem 1.5rem; font-family:'Share Tech Mono',monospace; font-size:12px; line-height:1.9; min-height:0; display:flex; flex-direction:column; justify-content:flex-end; }
+  #terminalBody {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+  padding: 1rem 1.5rem 2rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  line-height: 1.9;
+  min-height: 0;
+  display: block;
+}
 
   /* ── SHARED TERMINAL LINE STYLES ── */
   .t-out  { display:block; color:var(--green);    white-space:pre-wrap; word-break:break-word; }
